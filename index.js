@@ -1,5 +1,6 @@
 const BroadlinkRN = require('broadlinkjs-rm');
 const slack = require('slack');
+const {fetchLunch} = require('./lunch');
 
 const DEVICE_ADDR = process.env.DEVICE_ADDR;
 const BOT_TOKEN = process.env.BOT_TOKEN;
@@ -71,8 +72,20 @@ bot.message(function(msg) {
   if (!match) {
     return;
   }
+  let text = match[2];
 
-  var cmd = parseIrCommand(match[2]);
+  if (text.match(/food|lunch/)) {
+    fetchLunch().then((food) => {
+      if (!food) {
+        sendMessage(msg.channel, 'today no food at brotzeit :(');
+      } else {
+        sendMessage(msg.chanenl, 'today at brotzeit: ' + food);
+      }
+    });
+    return;
+  }
+
+  var cmd = parseIrCommand(text);
   if (cmd) {
     if (!device) {
       sendMessage(msg.channel, 'the AC is not ready yet :(');
