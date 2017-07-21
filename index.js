@@ -58,7 +58,11 @@ bot.hello(function(payload) {
 
 function sendMessage(channel, msg) {
   console.log('sending message', msg);
-  slack.chat.postMessage({token: BOT_TOKEN, channel: channel, text: msg, as_user: true}, function() {});
+  slack.chat.postMessage({token: BOT_TOKEN, channel: channel, text: msg, as_user: true}, function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
 }
 
 bot.message(function(msg) {
@@ -77,7 +81,7 @@ bot.message(function(msg) {
       if (!food) {
         sendMessage(msg.channel, 'today no food at brotzeit :(');
       } else {
-        sendMessage(msg.chanenl, 'today at brotzeit: ' + food);
+        sendMessage(msg.channel, 'today at brotzeit: ' + food);
       }
     });
     return;
