@@ -1,5 +1,5 @@
 {
-  "name": "office-bot",
+  "name": "schnitzel",
   "version": "1.0.0",
   "description": "Controls the sentry austria office",
   "main": "index.js",
