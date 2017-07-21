@@ -58,9 +58,7 @@ bot.hello(function(payload) {
 
 function sendMessage(channel, msg) {
   console.log('sending message', msg);
-  slack.chat.postMessage({token: BOT_TOKEN, channel: channel, text: msg, as_user: true}, function(err, data) {
-    console.log('response from send ok:', data.ok);
-  });
+  slack.chat.postMessage({token: BOT_TOKEN, channel: channel, text: msg, as_user: true}, function() {});
 }
 
 bot.message(function(msg) {
