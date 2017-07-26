@@ -100,4 +100,10 @@ bot.message(function(msg) {
   console.log('message to bot:', match[2]);
 });
 
-bot.listen({token: BOT_TOKEN});
+const listenCb = () => {
+  bot.ws.on('close', (code, reason) => {
+    bot.listen({token:BOT_TOKEN}, listenCb)
+  })
+}
+
+bot.listen({token: BOT_TOKEN}, listenCb);
