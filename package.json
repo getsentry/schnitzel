@@ -13,7 +13,7 @@
     "html-to-text": "3.3.0"
   },
   "devDependencies": {
-    "eslint": "4.2.0"
+    "eslint": "7.4.0"
   },
   "author": "",
   "license": "ISC"
